@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Forecast Search</title>
+    <meta charset="utf-8">
+    <title>Basic Bootstrap Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.4.1/moment-timezone-with-data-2010-2020.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <style>
+        .tab-bottom-padding {
+            padding-bottom: 40px;
+        }
+        
+        .nav-contents {
+            width: 50%;
+            margin: 0 auto;
+        }
+        
+        .text-large {
+            font-size: 16px;
+            height: 40px;
+        }
+        
+        .test {
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        .center-text {
+            text-align: center;
+        }
+        
+        .nav-tabs>li>a {
+            background-color: #ebebeb;
+            color: #337ab7;
+        }
+        
+        .nav-tabs>li.active>a,
+        .nav-tabs>li.active>a:hover,
+        .nav-tabs>li.active>a:focus {
+            color: white;
+            background-color: #2e79b9;
+            border: 1px solid white;
+        }
+        
+        .all-rows {
+            padding: 20px 0 20px 0;
+            background-color: white;
+            border-bottom: 1px solid #E0DCE0;
+        }
+        
+        .first-row {
+            background-color: #2e79b9;
+            color: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 10px solid white;
+        }
+        
+        .card-parent-div {
+            background-color: #2f343a;
+            color: #ffffff;
+        }
+        
+        .cards {
+            width: 7%;
+            margin: 0 auto;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        
+        .b {
+            font-weight: bold;
+        }
+        
+        .padding {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        @media (max-width: 992px) {
+            .card-parent-div {
+                background-color: transparent;
+            }
+            .cards {
+                width: 100%;
+            }
+        }
+        
+        .col {
+            display: inline-block;
+            width: 19%;
+            text-align: center;
+        }
+        
+        .fri {
+            background-color: #357BB6;
+        }
+        
+        #userForm label.error {
+            color: #FB3A3A;
+            font-weight: bold;
+            display: block;
+            padding-top: 10px;
+        }
+        
+        @media screen and (min-width: 992px) {
+            .test-class {
+                float: left;
+                padding: 0 5px;
+            }
+        }
+        
+        .sat {
+            background-color: #f0423f;
+        }
+        
+        .sun {
+            background-color: #e98e49;
+        }
+        
+        .mon {
+            background-color: #a8a430;
+        }
+        
+        .tues {
+            background-color: #9a6da9;
+        }
+        
+        .wed {
+            background-color: #f57a7c;
+        }
+        
+        .after {
+            content: '*';
+            color: red;
+        }
+        
+        .thurs {
+            background-color: #d14271;
+        }
+        
+        #container {
+            margin-top: 0px;
+        }
+        
+        @media screen and (min-width: 992px) {
+            #container {
+                margin-top: 20px;
+            }
+        }
+        
+        .fields {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 10px 10px 10px;
+        }
+        
+        .form-left-padding {
+            padding-left: 5px;
+            padding-right: 2px;
+        }
+        
+        body {
+            background-image: url("http://cs-server.usc.edu:45678/hw/hw8/images/bg.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed !important;
+            
+        }
+        
+        html {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .coll-div {
+            background-color: #f3f2f3 !important;
+            height: 100%;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 1024px) {
+            .radio {
+                margin-top: 0;
+            }
+            .column-fix {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+        
+        .super {
+            top: -2.5em;
+            font-size: 21px;
+        }
+        
+        .coll-resp {
+            float: left;
+            width: 25%;
+        }
+        
+        .heading {
+            padding: 4px;
+            margin: 0 auto;
+            background: white;
+            width: 90%;
+        }
+        
+        .val {
+            padding-top: 10px;
+            margin-bottom: 12px;
+            margin: 0 auto;
+            width: 90%;
+        }
+        
+        .heading div div {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .val div div {
+            font-size: 15px;
+        }
+        
+        .top-height {
+            height: 20px;
+        }
+        
+        .bottom-height {
+            height: 40px;
+        }
+    </style>
+
+
+    <script>
+        $('document').ready(function () {
+            $("#super-parent").hide();
+            var street;
+            var city;
+            var state;
+            var temp;
+            var temp_unit;
+            var wind_unit;
+            var dew_unit;
+            var vis_unit;
+            var temp_value;
+            var pressure_unit;
+            var img_link;
+            var resp;
+
+            function resetForm($form) {
+                console.log("Came in func");
+                $form.find('input:text').val('');
+                $form.find('input:radio')
+                    .removeAttr('checked');
+            }
+
+            $("#clear").click(function () {
+                console.log("Came in parent func");
+                $('INPUT:text, SELECT').val('');
+                $('INPUT:text, INPUT:password, INPUT:file, SELECT, TEXTAREA').val('');
+                $('INPUT:checkbox, INPUT:radio', '#myForm').removeAttr('checked').removeAttr('selected');
+                $('#check').prop('checked', true);
+                $("#now").addClass("active in");
+                $("#7").removeClass("active");
+                $("#24").removeClass("active");
+                $("#li2").removeClass("active");
+                $("#li3").removeClass("active");
+                $("#li1").addClass("active");
+                $("#super-parent").hide();
+            });
+
+            $("#userForm").validate({
+                rules: {
+                    address: "required",
+                    city: "required",
+                    state: {
+
+                        required: true
+                    }
+                },
+                messages: {
+                    address: "Please enter the street address",
+                    city: "Please enter the city",
+                    state: {
+                        required: "Please select a state"
+                    }
+                },
+                submitHandler: function (form) {
+                    street = $('#address').val();
+                    city = $('#city').val();
+                    state = $('#state').val();
+                    temp = $('input:radio[name=degree]:checked').val();
+
+                    if (temp == "C") {
+                        temp_unit = "C";
+                        wind_unit = "m/s";
+                        dew_unit = "C";
+                        vis_unit = "km";
+                        pressure_unit = "hPa";
+                    }
+                    else{
+                        temp_unit = "F";
+                        wind_unit = "mph";
+                        dew_unit = "F";
+                        vis_unit = "mi";
+                        pressure_unit = "mb";
+                    }
+
+                    var form = {
+                        "address": street,
+                        "city": city,
+                        "state": state,
+                        "temp": temp
+                    };
+                    $.ajax({
+                        url: 'index.php',
+                        data: form,
+                        type: 'GET',
+                        success: function (output) {
+                            if (output == "Data not found") {
+                                alert("Bad Search - Invalid Response");
+                            } else {
+
+                                var map = false;
+                                resp = JSON.parse(output);
+                                $("#super-parent").show();
+                                $('a[href=#now]').on('shown.bs.tab', function (e) {
+                                    if (!mapInitialized) {
+                                        map = true;
+                                    }
+                                });
+
+                                if ($("#basicMap").is(":visible")) {
+                                    console.log("Hello");
+                                    var latitude = resp.latitude;
+                                    var longitude = resp.longitude;
+
+                                    document.getElementById("basicMap").innerHTML = "";
+                                    map = new OpenLayers.Map("basicMap");
+                                    var mapnik = new OpenLayers.Layer.OSM();
+                                    var fromProjection = new OpenLayers.Projection("EPSG:4326"); // Transform from WGS 1984
+                                    var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+                                    var position = new OpenLayers.LonLat(longitude, latitude).transform(fromProjection, toProjection);
+                                    var zoom = 10;
+                                    var layer_cloud = new OpenLayers.Layer.XYZ(
+                                        "clouds",
+                                        "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png", {
+                                            isBaseLayer: false,
+                                            opacity: 0.7,
+                                            sphericalMercator: true
+                                        }
+                                    );
+
+                                    var layer_precipitation = new OpenLayers.Layer.XYZ(
+                                        "precipitation",
+                                        "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png", {
+                                            isBaseLayer: false,
+                                            opacity: 0.7,
+                                            sphericalMercator: true
+                                        }
+                                    );
+
+                                    map.addLayers([mapnik, layer_precipitation, layer_cloud]);
+                                    map.setCenter(position, zoom);
+                                }
+
+
+
+
+
+                                var precip = resp.currently.precipIntensity;
+                                var rain = (resp.currently.precipProbability) * 100;
+                                var wind = resp.currently.windSpeed;
+                                var dew = resp.currently.dewPoint;
+                                var humidity = resp.currently.humidity;
+                                var vis = resp.currently.visibility;
+                                var sunrise = resp.daily.data[0].sunriseTime;
+                                var sunset = resp.daily.data[0].sunsetTime;
+                                var img = resp.currently.icon;
+                                temp_value = resp.currently.temperature;
+                                var temp_min = resp.daily.data[0].temperatureMin;
+                                var temp_max = resp.daily.data[0].temperatureMax;
+
+                                var risetime_12 = moment.unix(resp.daily.data[0].sunriseTime).tz(resp.timezone).format('hh:mm A');
+
+                                if (precip >= 0 && precip < 0.002) {
+                                    precip = "None";
+                                }
+                                if (precip >= 0.002 && precip < 0.017) {
+                                    precip = "Very Light";
+                                }
+                                if (precip >= 0.017 && precip < 0.1) {
+                                    precip = "Light";
+                                }
+                                if (precip >= 0.1 && precip < 0.4) {
+                                    $precip = "Moderate";
+                                }
+                                if (precip >= 0.4) {
+                                    $precip = "Heavy";
+                                }
+
+                                var bedtime_12 = moment.unix(resp.daily.data[0].sunsetTime).tz(resp.timezone).format('hh:mm A');
+
+                                $("#precip").text(precip);
+                                $("#rain").text(rain + "%");
+                                $("#wind").text(wind + wind_unit);
+                                $("#dew").text(dew);
+                                $("#dew_unit").text(dew_unit);
+                                $("#hum").text(humidity + "%");
+                                if (vis) {
+                                    $("#vis").text(vis + vis_unit);
+                                } else {
+                                    $("#vis").text("NA");
+                                }
+                                $("#sunrise").text(risetime_12);
+                                $("#sunset").text(bedtime_12);
+                                $("#temp_unit").text(temp_unit);
+
+                                var img_map = {
+                                    "clear-day": "clear.png",
+                                    "clear-night": "clear_night.png",
+                                    "rain": "rain.png",
+                                    "snow": "snow.png",
+                                    "sleet": "sleet.png",
+                                    "wind": "wind.png",
+                                    "fog": "fog.png",
+                                    "cloudy": "cloudy.png",
+                                    "partly-cloudy-day": "cloud_day.png",
+                                    "partly-cloudy-night": "cloud_night.png",
+                                };
+
+                                img_link = "http://cs-server.usc.edu:45678/hw/hw8/images/" + img_map[img];
+                                $("#weather_img").attr("src", img_link);
+
+                                $("#summary").text(resp.currently.summary + " in " + city + ", " + state);
+                                $("#temp_value").text(Math.round(temp_value));
+                                $("#temp_min").text(Math.round(temp_min));
+                                $("#temp_max").text(Math.round(temp_max));
+
+                                $("#set_temp_header").text("Temp(" + String.fromCharCode(176) + temp_unit + ")");
+                                for (var i = 1; i <= 24; i++) {
+                                    var time_12 = moment.unix(resp.hourly.data[i].time).tz(resp.timezone).format('hh:mm A');
+
+                                    $("#time_row_" + i).text(time_12);
+                                    $("#sum_row_" + i).attr("src", "http://cs-server.usc.edu:45678/hw/hw8/images/" + img_map[resp.hourly.data[i].icon]);
+                                    $("#cloud_row_" + i).text(Math.round(resp.hourly.data[i].cloudCover * 100) + "%");
+                                    $("#temp_row_" + i).text(resp.hourly.data[i].temperature);
+                                    $("#wind_val_" + i).text(resp.hourly.data[i].windSpeed + wind_unit);
+                                    $("#hum_val_" + i).text(Math.round(resp.hourly.data[i].humidity * 100) + "%");
+                                    if (resp.hourly.data[i].visibility) {
+                                        $("#vis_val_" + i).text(resp.hourly.data[i].visibility + vis_unit);
+                                    } else {
+                                        $("#vis_val_" + i).text("NA");
+                                    }
+                                    $("#pres_val_" + i).text(resp.hourly.data[i].pressure + pressure_unit);
+                                }
+
+                                var day_arr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                                var month_arr = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+                                
+                                for (var i = 1; i <= 7; i++) {
+                                    var t = moment.unix(resp.daily.data[i].time).tz(resp.timezone);
+                                    var month = month_arr[parseInt(t.month())];
+                                    var day = day_arr[parseInt(t.day())];
+                                    $("#day_" + i).text(day);
+                                    $("#date_" + i).text(month + " " + t.date());
+                                    $("#img_" + i).attr("src", "http://cs-server.usc.edu:45678/hw/hw8/images/" + img_map[resp.daily.data[i].icon]);
+                                    $("#max_" + i).text(Math.round(resp.daily.data[i].temperatureMax) + String.fromCharCode(176));
+                                    $("#min_" + i).text(Math.round(resp.daily.data[i].temperatureMin) + String.fromCharCode(176));
+
+
+                                    var sunrise = new Date(resp.daily.data[i].sunriseTime * 1000);
+                                    var sunrise_12 = moment.unix(resp.daily.data[i].sunriseTime).tz(resp.timezone).format('hh:mm A');
+                                    var sunset = new Date(resp.daily.data[i].sunsetTime * 1000);
+                                    var sunset_12 = moment.unix(resp.daily.data[i].sunsetTime).tz(resp.timezone).format('hh:mm A');
+                                    $("#rise_" + i).text(sunrise_12);
+                                    $("#set_" + i).text(sunset_12);
+                                    $("#hum_" + i).text(Math.round(resp.daily.data[i].humidity * 100) + "%");
+                                    $("#wind_" + i).text(resp.daily.data[i].windSpeed + wind_unit);
+                                    if (resp.daily.data[i].visibility) {
+                                        $("#vis_" + i).text(resp.daily.data[i].visibility + vis_unit);
+                                    } else {
+                                        $("#vis_" + i).text("NA");
+                                    }
+                                    $("#pres_" + i).text(resp.daily.data[i].pressure + pressure_unit);
+                                    $("#myModalLabel_" + i).text("Weather in " + city + " on " + month + " " + t.date());
+                                    $("#image_" + i).attr("src", "http://cs-server.usc.edu:45678/hw/hw8/images/" + img_map[resp.daily.data[i].icon]);
+                                    $("#d_" + i).text(day + ": ");
+                                    $("#d_sum_" + i).text(resp.daily.data[i].summary);
+                                }
+
+                            }
+                        },
+                        error: function (err, error) {
+                            console.log("error");
+                            console.log(err, error);
+                        }
+                    });
+                    return false;
+                }
+
+            });
+
+            $('#share_button').click(function (e) {
+                console.log("Hello");
+                FB.ui({
+                        method: 'feed',
+                        name: 'Current Weather in ' + city + ", " + state,
+                        picture: img_link,
+                        description: resp.currently.summary + "," + Math.round(temp_value) + String.fromCharCode(176) + temp_unit,
+                        caption: "WEATHER INFORMATION FROM FORECAST.IO",
+                        link: 'http://forecast.io',
+                        message: '',
+                    },
+                    function (response) {
+                        if (response && !response.error_message) {
+                            alert('Posted successfully');
+                        } else {
+                            alert('Not Posted');
+                        }
+                    }
+                );
+            });
+
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '556645881151139',
+                    status: true,
+                    cookie: true,
+                    xfbml: true
+                });
+            };
+            (function () {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <div class="test">
+        <h1 style="text-align: center;">Forecast Search</h1>
+        <br>
+        <br>
+    </div>
+    <div class="test fields">
+        <div style="color:white; margin-left: 0px; margin-right: 0px;" class="row">
+            <form id="userForm">
+                <div class="col-md-3 form-left-padding">
+                    <label>Street Address: <span class="after">*</span></label>
+                    <br>
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Enter street address" required>
+                </div>
+                <div class="col-md-2 form-left-padding">
+                    <label>City: <span class="after">*</span></label>
+                    <br>
+                    <input type="text" name="city" id="city" class="form-control" placeholder="Enter the city name" required>
+                </div>
+                <div class="col-md-2 form-left-padding">
+                    <label>State: <span class="after">*</span></label>
+                    <br>
+                    <select id="state" class="form-control form-left-padding" name="state" value="">
+                        <option value="" selected disabled>Select your state...</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+                <div class="col-md- test-class">
+                    <label for="exampleInputEmail1">Degree: <span class="after">*</span></label>
+                    <br>
+                    <label class="radio-inline">
+                        <input type="radio" name="degree" id="check" value="F" checked>Fahrenheit</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="degree" value="C">Celcius</label>
+                </div>
+                <div class="col-md-">
+                    <br>
+                    <div class="pull-right" style="padding-left: 0;">
+                        <button id="find" type="submit" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+                        </button>
+                        <button id="clear" type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear
+                        </button>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="pull-right">
+                        <label>Powered by:</label>
+                        <a href='http://forecast.io'><img style="width: 90px; height: 60px;" src="http://cs-server.usc.edu:45678/hw/hw8/images/forecast_logo.png"></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <hr class="test">
+    <br>
+
+
+
+
+
+
+
+    <div id="super-parent">
+
+        <div class="test">
+            <ul class="nav nav-tabs">
+                <li id="li1" role="presentation" class="active"><a data-toggle="tab" href="#now" role="tab">Right Now</a></li>
+                <li id="li2" role="presentation"><a data-toggle="tab" href="#24" role="tab">Next 24 Hours</a></li>
+                <li id="li3" role="presentation"><a data-toggle="tab" href="#7" role="tab">Next 7 Days</a></li>
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div id="my-tab-content" class="test tab-content nav-contents">
+            <div class="row tab-pane active fade in tab-bottom-padding" style="margin-left: 0px; margin-right: 0px;" id="now">
+                <div class="col-md-6" style="padding-right: 0px; background-color: lightcoral; padding-left: 0px;">
+                    <div id="container">
+                        <div class="col-md-6">
+                            <img class="center-block" id="weather_img" style="height: 13em; padding-top: 1em;" src="">
+                        </div>
+                        <div class="col-md-6 center-text">
+                            <span id="summary" style="color: white; font-weight: bold; padding-top: 10px;">Mostly cloudy in Los Angeles, CA</span>
+                            <br>
+                            <span style="color: white;"><span id="temp_value" style="font-size: 7em;">71</span><sup class="super"> &#176 <span id="temp_unit">F</span></sup></span>
+                            <br>
+                            <br>
+                            <div style="padding-bottom: 5px;">
+                                <span style="color: blue;">L: <span id="temp_min" style="color: blue;">70</span>&#176 </span>|
+                                <span style="color: green;"> H: 
+                                <span id="temp_max" style="color: green;">79</span>&#176</span>
+                            </div>
+                            <span style="bottom: 0; right: 0;"><a id="share_button" href="#"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/fb_icon.png" style="bottom: 0px; right: 0px; position: absolute; padding-right: 10px; padding-bottom: 10px; height: 4em; width: 4em;"></a></span>
+                        </div>
+                    </div>
+                    <table class="table table-striped" style="margin-bottom: 0px;">
+                        <tr>
+                            <td style="width: 60%;">Precipitation</td>
+                            <td id="precip">asd</td>
+                        </tr>
+                        <tr class="danger">
+                            <td style="width: 60%;">Chance of Rain</td>
+                            <td id="rain">asd</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 60%;">Wind Speed</td>
+                            <td id="wind">asd</td>
+                        </tr>
+                        <tr class="danger">
+                            <td style="width: 60%;">Dew Point</td>
+                            <td><span id="dew">asd</span>&#176<span id="dew_unit"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 60%;">Humidity</td>
+                            <td id="hum">asd</td>
+                        </tr>
+                        <tr class="danger">
+                            <td style="width: 60%;">Visibility</td>
+                            <td id="vis">asd</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 60%;">Sunrise</td>
+                            <td id="sunrise">asd</td>
+                        </tr>
+                        <tr class="danger">
+                            <td style="width: 60%;">Sunset</td>
+                            <td id="sunset">asd</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-md-6" style="height: 516px;" id="basicMap"></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div class="tab-pane fade" id="24" style="padding-bottom: 20px;">
+                <div class="first-row">
+                    <div class="col">
+                        Time
+                    </div>
+                    <div class="col">
+                        Summary
+                    </div>
+                    <div class="col">
+                        Cloud Cover
+                    </div>
+                    <div class="col" id="set_temp_header">
+                        Temp
+                    </div>
+                    <div class="col">
+                        View Details
+                    </div>
+                </div>
+                <div class="all-rows">
+                    <div class="col" id="time_row_1">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_1" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_1">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_1">
+                        70
+                    </div>
+                    <div class="col" id="det_row_1">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_1" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+
+                    <div class="collapse coll-div text-center" id="coll_1">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_1">Wind</div>
+                                <div class="coll-resp" id="hum_val_1">Humidity</div>
+                                <div class="coll-resp" id="vis_val_1">Visibility</div>
+                                <div class="coll-resp" id="pres_val_1">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_2">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_2" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_2">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_2">
+                        70
+                    </div>
+                    <div class="col" id="det_row_2">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_2" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_2">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_2">Wind</div>
+                                <div class="coll-resp" id="hum_val_2">Humidity</div>
+                                <div class="coll-resp" id="vis_val_2">Visibility</div>
+                                <div class="coll-resp" id="pres_val_2">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_3">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_3" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_3">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_3">
+                        70
+                    </div>
+                    <div class="col" id="det_row_3">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_3" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_3">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_3">Wind</div>
+                                <div class="coll-resp" id="hum_val_3">Humidity</div>
+                                <div class="coll-resp" id="vis_val_3">Visibility</div>
+                                <div class="coll-resp" id="pres_val_3">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_4">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_4" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_4">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_4">
+                        70
+                    </div>
+                    <div class="col" id="det_row_4">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_4" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_4">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_4">Wind</div>
+                                <div class="coll-resp" id="hum_val_4">Humidity</div>
+                                <div class="coll-resp" id="vis_val_4">Visibility</div>
+                                <div class="coll-resp" id="pres_val_4">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_5">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_5" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_5">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_5">
+                        70
+                    </div>
+                    <div class="col" id="det_row_5">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_5" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_5">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_5">Wind</div>
+                                <div class="coll-resp" id="hum_val_5">Humidity</div>
+                                <div class="coll-resp" id="vis_val_5">Visibility</div>
+                                <div class="coll-resp" id="pres_val_5">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_6">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_6" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_6">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_6">
+                        70
+                    </div>
+                    <div class="col" id="det_row_6">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_6" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_6">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_6">Wind</div>
+                                <div class="coll-resp" id="hum_val_6">Humidity</div>
+                                <div class="coll-resp" id="vis_val_6">Visibility</div>
+                                <div class="coll-resp" id="pres_val_6">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_7">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_7" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_7">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_7">
+                        70
+                    </div>
+                    <div class="col" id="det_row_7">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_7" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_7">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_7">Wind</div>
+                                <div class="coll-resp" id="hum_val_7">Humidity</div>
+                                <div class="coll-resp" id="vis_val_7">Visibility</div>
+                                <div class="coll-resp" id="pres_val_7">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_8">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_8" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_8">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_8">
+                        70
+                    </div>
+                    <div class="col" id="det_row_8">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_8" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_8">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_8">Wind</div>
+                                <div class="coll-resp" id="hum_val_8">Humidity</div>
+                                <div class="coll-resp" id="vis_val_8">Visibility</div>
+                                <div class="coll-resp" id="pres_val_8">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_9">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_9" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_9">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_9">
+                        70
+                    </div>
+                    <div class="col" id="det_row_9">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_9" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_9">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_9">Wind</div>
+                                <div class="coll-resp" id="hum_val_9">Humidity</div>
+                                <div class="coll-resp" id="vis_val_9">Visibility</div>
+                                <div class="coll-resp" id="pres_val_9">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_10">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_10" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_10">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_10">
+                        70
+                    </div>
+                    <div class="col" id="det_row_10">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_10" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_10">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_10">Wind</div>
+                                <div class="coll-resp" id="hum_val_10">Humidity</div>
+                                <div class="coll-resp" id="vis_val_10">Visibility</div>
+                                <div class="coll-resp" id="pres_val_10">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_11">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_11" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_11">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_11">
+                        70
+                    </div>
+                    <div class="col" id="det_row_11">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_11" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_11">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_11">Wind</div>
+                                <div class="coll-resp" id="hum_val_11">Humidity</div>
+                                <div class="coll-resp" id="vis_val_11">Visibility</div>
+                                <div class="coll-resp" id="pres_val_11">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_12">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_12" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_12">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_12">
+                        70
+                    </div>
+                    <div class="col" id="det_row_12">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_12" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_12">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_12">Wind</div>
+                                <div class="coll-resp" id="hum_val_12">Humidity</div>
+                                <div class="coll-resp" id="vis_val_12">Visibility</div>
+                                <div class="coll-resp" id="pres_val_12">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_13">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_13" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_13">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_13">
+                        70
+                    </div>
+                    <div class="col" id="det_row_13">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_13" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_13">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_13">Wind</div>
+                                <div class="coll-resp" id="hum_val_13">Humidity</div>
+                                <div class="coll-resp" id="vis_val_13">Visibility</div>
+                                <div class="coll-resp" id="pres_val_13">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_14">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_14" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_14">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_14">
+                        70
+                    </div>
+                    <div class="col" id="det_row_14">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_14" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_14">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_14">Wind</div>
+                                <div class="coll-resp" id="hum_val_14">Humidity</div>
+                                <div class="coll-resp" id="vis_val_14">Visibility</div>
+                                <div class="coll-resp" id="pres_val_14">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_15">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_15" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_15">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_15">
+                        70
+                    </div>
+                    <div class="col" id="det_row_15">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_15" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_15">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_15">Wind</div>
+                                <div class="coll-resp" id="hum_val_15">Humidity</div>
+                                <div class="coll-resp" id="vis_val_15">Visibility</div>
+                                <div class="coll-resp" id="pres_val_15">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_16">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_16" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_16">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_16">
+                        70
+                    </div>
+                    <div class="col" id="det_row_16">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_16" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_16">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_16">Wind</div>
+                                <div class="coll-resp" id="hum_val_16">Humidity</div>
+                                <div class="coll-resp" id="vis_val_16">Visibility</div>
+                                <div class="coll-resp" id="pres_val_16">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_17">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_17" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_17">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_17">
+                        70
+                    </div>
+                    <div class="col" id="det_row_17">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_17" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_17">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_17">Wind</div>
+                                <div class="coll-resp" id="hum_val_17">Humidity</div>
+                                <div class="coll-resp" id="vis_val_17">Visibility</div>
+                                <div class="coll-resp" id="pres_val_17">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_18">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_18" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_18">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_18">
+                        70
+                    </div>
+                    <div class="col" id="det_row_18">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_18" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_18">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_18">Wind</div>
+                                <div class="coll-resp" id="hum_val_18">Humidity</div>
+                                <div class="coll-resp" id="vis_val_18">Visibility</div>
+                                <div class="coll-resp" id="pres_val_18">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_19">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_19" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_19">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_19">
+                        70
+                    </div>
+                    <div class="col" id="det_row_19">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_19" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_19">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_19">Wind</div>
+                                <div class="coll-resp" id="hum_val_19">Humidity</div>
+                                <div class="coll-resp" id="vis_val_19">Visibility</div>
+                                <div class="coll-resp" id="pres_val_19">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_20">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_20" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_20">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_20">
+                        70
+                    </div>
+                    <div class="col" id="det_row_20">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_20" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_20">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_20">Wind</div>
+                                <div class="coll-resp" id="hum_val_20">Humidity</div>
+                                <div class="coll-resp" id="vis_val_20">Visibility</div>
+                                <div class="coll-resp" id="pres_val_20">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_21">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_21" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_21">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_21">
+                        70
+                    </div>
+                    <div class="col" id="det_row_21">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_21" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_21">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_21">Wind</div>
+                                <div class="coll-resp" id="hum_val_21">Humidity</div>
+                                <div class="coll-resp" id="vis_val_21">Visibility</div>
+                                <div class="coll-resp" id="pres_val_21">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_22">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_22" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_22">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_22">
+                        70
+                    </div>
+                    <div class="col" id="det_row_22">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_22" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_22">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_22">Wind</div>
+                                <div class="coll-resp" id="hum_val_22">Humidity</div>
+                                <div class="coll-resp" id="vis_val_22">Visibility</div>
+                                <div class="coll-resp" id="pres_val_22">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_23">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_23" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_23">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_23">
+                        70
+                    </div>
+                    <div class="col" id="det_row_23">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_23" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_23">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_23">Wind</div>
+                                <div class="coll-resp" id="hum_val_23">Humidity</div>
+                                <div class="coll-resp" id="vis_val_23">Visibility</div>
+                                <div class="coll-resp" id="pres_val_23">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+                <div class="all-rows">
+                    <div class="col" id="time_row_24">
+                        10:00 PM
+                    </div>
+                    <div class="col">
+                        <img src="" id="sum_row_24" style="height: 4em;">
+                    </div>
+                    <div class="col" id="cloud_row_24">
+                        100%
+                    </div>
+                    <div class="col" id="temp_row_24">
+                        70
+                    </div>
+                    <div class="col" id="det_row_24">
+                        <a class="glyphicon glyphicon-plus" data-toggle="collapse" href="#coll_24" aria-expanded="false" aria-controls="collapseExample"></a>
+                    </div>
+                    <div class="collapse coll-div text-center" id="coll_24">
+                        <div class="top-height"></div>
+                        <div class="heading">
+                            <div class="row">
+                                <div class="coll-resp">Wind</div>
+                                <div class="coll-resp">Humidity</div>
+                                <div class="coll-resp">Visibility</div>
+                                <div class="coll-resp">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="val">
+                            <div class="row">
+                                <div class="coll-resp" id="wind_val_24">Wind</div>
+                                <div class="coll-resp" id="hum_val_24">Humidity</div>
+                                <div class="coll-resp" id="vis_val_24">Visibility</div>
+                                <div class="coll-resp" id="pres_val_24">Pressure</div>
+                            </div>
+                        </div>
+                        <div class="bottom-height"></div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div class="card-parent-div text-center tab-pane fade" id="7">
+                <div id="1" class="cards fri" data-toggle="modal" data-target="#myModal1">
+                    <p id="day_1" class="b">Friday</p>
+                    <p id="date_1" class="b">Oct 16</p>
+                    <p>
+                        <img id="img_1" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"> </p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_1" style="font-size: 29px;"><b>67</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_1" style="font-size: 29px;"><b>81</b></p>
+                </div>
+                <div id="2" class="cards sat" data-toggle="modal" data-target="#myModal2">
+                    <p id="day_2" class="b">Saturday</p>
+                    <p id="date_2" class="b">Oct 16</p>
+                    <p><img id="img_2" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"></p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_2" style="font-size: 29px;"><b>66</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_2" style="font-size: 29px;"><b>82</b></p>
+                </div>
+                <div id="3" class="cards sun" data-toggle="modal" data-target="#myModal3">
+                    <p id="day_3" class="b">Sunday</p>
+                    <p id="date_3" class="b">Oct 16</p>
+                    <p><img id="img_3" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"></p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_3" style="font-size: 29px;"><b>65</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_3" style="font-size: 29px;"><b>81</b></p>
+                </div>
+                <div id="4" class="cards mon" data-toggle="modal" data-target="#myModal4">
+                    <p id="day_4" class="b">Monday</p>
+                    <p id="date_4" class="b">Oct 16</p>
+                    <p><img id="img_4" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"></p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_4" style="font-size: 29px;"><b>67</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_4" style="font-size: 29px;"><b>81</b></p>
+                </div>
+                <div id="5" class="cards tues" data-toggle="modal" data-target="#myModal5">
+                    <p id="day_5" class="b">Tuesday</p>
+                    <p id="date_5" class="b">Oct 16</p>
+                    <p><img id="img_5" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"></p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_5" style="font-size: 29px;"><b>63</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_5" style="font-size: 29px;"><b>85</b></p>
+                </div>
+                <div id="6" class="cards wed" data-toggle="modal" data-target="#myModal6">
+                    <p id="day_6" class="b">Wednesday</p>
+                    <p id="date_6" class="b">Oct 16</p>
+                    <p><img id="img_6" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"></p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_6" style="font-size: 29px;"><b>66</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_6" style="font-size: 29px;"><b>86</b></p>
+                </div>
+                <div id="7" class="cards thurs" data-toggle="modal" data-target="#myModal7">
+                    <p id="day_7" class="b">Thursday</p>
+                    <p id="date_7" class="b">Oct 16</p>
+                    <p><img id="img_7" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 4em;"></p>
+                    <p class="padding">Min
+                        <br>Temp</p>
+                    <p id="min_7" style="font-size: 29px;"><b>65</b></p>
+                    <p class="padding">Max
+                        <br>Temp</p>
+                    <p id="max_7" style="font-size: 29px;"><b>86</b></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_1">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_1" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_1">Friday:</span>
+                        <span id="d_sum_1" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_1">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_1">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_1">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_1">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_1">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_1">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_2">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_2" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_2">Friday:</span>
+                        <span id="d_sum_2" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_2">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_2">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_2">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_2">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_2">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_2">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_3">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_3" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_3">Friday:</span>
+                        <span id="d_sum_3" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_3">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_3">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_3">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_3">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_3">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_3">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_4">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_4" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_4">Friday:</span>
+                        <span id="d_sum_4" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_4">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_4">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_4">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_4">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_4">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_4">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_5">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_5" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_5">Friday:</span>
+                        <span id="d_sum_5" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_5">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_5">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_5">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_5">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_5">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_5">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_6">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_6" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_6">Friday:</span>
+                        <span id="d_sum_6" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_6">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_6">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_6">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_6">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_6">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_6">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel_7">Weather in Los Angeles</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="image_7" src="http://cs-server.usc.edu:45678/hw/hw8/images/cloud_night.png" style="height: 8em;">
+                    <br>
+                    <br>
+                    <div class="below-img-sum-text text-center" style="font-size: 20px;font-weight: bold;">
+                        <span id="d_7">Friday:</span>
+                        <span id="d_sum_7" style="color: orange;">Mostly cloudy throughout the day</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunrise time</div>
+                            <span id="rise_7">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Sunset time</div>
+                            <span id="set_7">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Humidity</div>
+                            <span id="hum_7">07:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5px;">
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Windspeed</div>
+                            <span id="wind_7">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Visibility</div>
+                            <span id="vis_7">07:00 AM</span>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-weight: bold; padding: 5px 0">Pressure</div>
+                            <span id="pres_7">07:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
